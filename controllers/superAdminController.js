@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { stdin } from 'node:process';
 import { connectToDatabase } from '../config/database.config.js';
 import Admin from '../models/admin.model.js';
 import { hashData } from '../utils/hasher.utils.js';
@@ -52,6 +53,18 @@ async function createSuperAdmin() {
 				console.log('You need to provide a valid email address.');
 				return rl.close();
 			}
+			const existingSuperAdmin = await Admin.findOne({ email: email });
+			if (existingSuperAdmin) {
+				console.log('user with email already exists.');
+				return rl.close();
+			}
+			let phoneNumber = await askQuestion(
+				`Your phone number if you don't mind: `
+			);
+			if (!phoneNumber) {
+				console.log(`No problem, let's continue.`);
+				phoneNumber = 'no phone number provided';
+			}
 
 			const password = await askQuestion('Your password: ');
 			if (!password) {
@@ -65,8 +78,10 @@ async function createSuperAdmin() {
 				firstName,
 				lastName,
 				email,
+				phoneNumber,
 				password: hashedPassword,
 				role: 'super-admin',
+				permissions: 'read-write-delete',
 			});
 
 			await superAdmin.save();
@@ -75,7 +90,7 @@ async function createSuperAdmin() {
 		} else {
 			console.log('Aborted by the user.');
 		}
-
+		
 		rl.close();
 	} catch (error) {
 		console.error('An error occurred while creating the super-admin:', error);
