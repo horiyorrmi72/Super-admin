@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { connectToDatabase } from '../config/database.config';
-import User from '../models/user.model';
+import Admin from '../models/admin.model.js';
 import { hashData } from '../utils/hasher.utils';
 import readline from 'node:readline';
 
@@ -17,7 +17,7 @@ const validateEmail = (email) => {
 	return emailRegex.test(email);
 };
 
-async function createSuperUser() {
+async function createSuperAdmin() {
 	try {
 		console.log('Create a super admin\n');
 
@@ -61,7 +61,7 @@ async function createSuperUser() {
 
 			const hashedPassword = await hashData(password);
 
-			const newUser = new User({
+			const superAdmin = new Admin({
 				firstName,
 				lastName,
 				email,
@@ -69,7 +69,7 @@ async function createSuperUser() {
 				role: 'super-admin',
 			});
 
-			await newUser.save();
+			await superAdmin.save();
 			console.log(`Super-Admin ${firstName} ${lastName} created successfully!`);
 		} else {
 			console.log('Aborted by the user.');
@@ -82,4 +82,4 @@ async function createSuperUser() {
 	}
 }
 
-createSuperUser();
+createSuperAdmin();
