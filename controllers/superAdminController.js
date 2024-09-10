@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { connectToDatabase } from '../config/database.config';
+import { connectToDatabase } from '../config/database.config.js';
 import Admin from '../models/admin.model.js';
-import { hashData } from '../utils/hasher.utils';
+import { hashData } from '../utils/hasher.utils.js';
 import readline from 'node:readline';
 
 const rl = readline.createInterface({
@@ -71,6 +71,7 @@ async function createSuperAdmin() {
 
 			await superAdmin.save();
 			console.log(`Super-Admin ${firstName} ${lastName} created successfully!`);
+			rl.close();
 		} else {
 			console.log('Aborted by the user.');
 		}
