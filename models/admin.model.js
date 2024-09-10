@@ -12,13 +12,13 @@ const adminSchema = new Schema({
 		minlength: 4,
 		select: false,
 	},
-	phoneNumber: { type: String,trim: true, unique: true },
+	phoneNumber: { type: String, trim: true, unique:false},
 	role: {
 		type: String,
 		required: true,
 		trim: true,
 		enum: ['admin', 'super-admin', 'super-user'],
-		select:false
+		select: false,
 	},
 	permissions: {
 		type: String,
@@ -26,7 +26,7 @@ const adminSchema = new Schema({
 		trim: true,
 		enum: ['read-only', 'read-write', 'read-write-delete'],
 		default: 'read-only',
-		select:false
+		select: false,
 	},
 });
 const Admin = mongoose.model('Admin', adminSchema);
