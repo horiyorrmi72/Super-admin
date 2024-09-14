@@ -11,3 +11,12 @@ export const signUpValidator = [
 	body('phoneNumber').notEmpty().withMessage('Phone number is required'),
 	body('password').notEmpty().withMessage('Password is required'),
 ];
+
+export const signInValidator = [
+	body('email')
+		.notEmpty()
+		.withMessage('Email is required!')
+		.isEmail()
+		.withMessage('Provide a valid email address.'),
+	body('password').notEmpty().withMessage('Password  can not be empty'),
+];
