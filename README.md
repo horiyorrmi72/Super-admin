@@ -20,3 +20,5 @@ To install the package, use npm:
 ```
 
 # Cooking the package 🤗# Super-admin
+- local testing of script
+![alt text](image-1.png)
