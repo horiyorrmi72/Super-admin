@@ -12,6 +12,13 @@
     "start": "NODE_ENV=production node server.js",
     "dev": "NODE_ENV=development nodemon server"
   },
+  "keywords": [
+    "super-admin-panel",
+    "admin-panel",
+    "node-js-super-admin-panel",
+    "nodejs-admin-panel",
+    "super-admin"
+  ],
   "author": "horla_techs",
   "license": "ISC",
   "dependencies": {
