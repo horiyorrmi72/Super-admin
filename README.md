@@ -21,4 +21,4 @@ To install the package, use npm:
 
 # Cooking the package 🤗# Super-admin
 - local testing of script
-![alt text](image-1.png)
+![test image](./views/images/image-1.png)
