@@ -13,12 +13,26 @@ A utility package for creating a super admin via CLI. The super admin can then s
 
 ## Installation
 
-To install the package, use npm: 
+To install the package:
+
+```
+npm i super-admin-panel
+```
+
+when installation is completed, run the below command from your terminal
+
+```
+create-super-admin
+```
+
+then provide all the necessary details, such as the database connection string, your name and other details.
+NB: this currently support mongo database, other database and more features are commig soon.
+
+# Cooking the package 🤗# Super-admin
 
 ```bash
  Dont npm install super-admin yet 🤗
 ```
 
-# Cooking the package 🤗# Super-admin
 - local testing of script
-![test image](./views/images/image-1.png)
+  ![test image](./views/images/image-1.png)
