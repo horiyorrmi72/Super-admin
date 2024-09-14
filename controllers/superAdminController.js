@@ -18,7 +18,7 @@ const validateEmail = (email) => {
 	return emailRegex.test(email);
 };
 
-async function createSuperAdmin() {
+export async function createSuperAdmin() {
 	try {
 		console.log('Create a super admin\n');
 
@@ -28,10 +28,8 @@ async function createSuperAdmin() {
 			console.log(`Great! Let's get you signed up.\n`);
 			const db_uri = await askQuestion('Database connection string: ');
 			if (!db_uri) {
-				console.log(
-					'You need to provide your database connection string where the user data will be stored.'
-				);
-				return rl.close();
+				console.log('You need to provide your database connection string.');
+				return;
 			}
 
 			await connectToDatabase(db_uri);
@@ -39,37 +37,36 @@ async function createSuperAdmin() {
 			const firstName = await askQuestion('Your first name: ');
 			if (!firstName) {
 				console.log('You need to provide your first name.');
-				return rl.close();
+				return;
 			}
 
 			const lastName = await askQuestion('Your last name: ');
 			if (!lastName) {
 				console.log('You need to provide your last name.');
-				return rl.close();
+				return;
 			}
 
 			const email = await askQuestion('Your email address: ');
 			if (!email || !validateEmail(email)) {
 				console.log('You need to provide a valid email address.');
-				return rl.close();
+				return;
 			}
-			const existingSuperAdmin = await Admin.findOne({ email: email });
+			const existingSuperAdmin = await Admin.findOne({ email });
 			if (existingSuperAdmin) {
-				console.log('user with email already exists.');
-				return rl.close();
+				console.log('A user with this email already exists.');
+				return;
 			}
-			let phoneNumber = await askQuestion(
-				`Your phone number if you don't mind: `
-			);
+
+			let phoneNumber = await askQuestion('Your phone number (optional): ');
 			if (!phoneNumber) {
-				console.log(`No problem, let's continue.`);
-				phoneNumber = 'no phone number provided';
+				phoneNumber = 'No phone number provided';
 			}
 
 			const password = await askQuestion('Your password: ');
-			if (!password) {
-				console.log('You need to provide a password.');
-				return rl.close();
+			const confirmPassword = await askQuestion('Confirm your password: ');
+			if (!password || password !== confirmPassword) {
+				console.log('Passwords do not match or password is missing.');
+				return;
 			}
 
 			const hashedPassword = await hashData(password);
@@ -86,14 +83,12 @@ async function createSuperAdmin() {
 
 			await superAdmin.save();
 			console.log(`Super-Admin ${firstName} ${lastName} created successfully!`);
-			rl.close();
 		} else {
 			console.log('Aborted by the user.');
 		}
-		
-		rl.close();
 	} catch (error) {
 		console.error('An error occurred while creating the super-admin:', error);
+	} finally {
 		rl.close();
 	}
 }
