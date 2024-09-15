@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  .form-container
+    h2 Create Admin User
+    .stepper 
+    form#admin-form
+      label(for="first-name") First Name:
+      br
+      input#first-name(type="text" required)
+      br
+      label(for="last-name") Last Name:
+      br
+      input#last-name(type="text" required)
+      br
+      label(for="phone") Phone Number:
+      br
+      input#phone(type="text" required)
+      br
+      label(for="password") Password:
+      br
+      input#password(type="password" required)
+      br
+      label(for="confirm-password") Confirm Password:
+      br
+      input#confirm-password(type="password" required)
+      br
+      label(for="role") Role:
+      br
+      select#role(required)
+        option(value="admin") Admin
+        option(value="super-user") Super User (rep)
+      br
+      button#signupAdmin(type="button") Create Admin User
