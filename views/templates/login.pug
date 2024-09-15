@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .form-container
+    h2 Login
+    form#login-form
+      label(for="email") Email:
+      br
+      input#email(type="email" required)
+      br
+      label(for="password") Password:
+      br
+      input#password(type="password" required)
+      br
+      button#loginBtn(type="submit") Sign In
