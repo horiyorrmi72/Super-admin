@@ -35,4 +35,7 @@ NB: this currently support mongo database, other database and more features are 
 ```
 
 - local testing of script
-  ![test image](./views/images/image-1.png)
+  ![test image](./public/images/image-1.png)
+
+- admin login page
+  ![login page](./public/images/image.png)
