@@ -27,15 +27,16 @@ export const deleteAdmins = async (req, res, next) => {
 };
 
 export const createSuperUser = async (req, res, next) => {
-	const { firstName, lastName, email, password, role , permissions} = req.body;
+	const { firstName, lastName, email, password, role, permissions } = req.body;
 	try {
-		if (!(firstName || lastName || email || password||role||permissions)) {
+		if (!(firstName || lastName || email || password || role || permissions)) {
 			return next(new AppError(400, 'you must provide the details'));
 		}
 		const existingUserWithRole = await User.findOne({ email: email });
-		if (existingUserWithRole && (
-			existingUserWithRole.role === role ||
-			existingUserWithRole.role === 'super-user')
+		if (
+			existingUserWithRole &&
+			(existingUserWithRole.role === role ||
+				existingUserWithRole.role === 'super-user')
 		) {
 			return next(new AppError(400, 'Existing user with role.'));
 		}
@@ -46,7 +47,7 @@ export const createSuperUser = async (req, res, next) => {
 			email,
 			password: hashTempPassword,
 			role: 'super-user',
-			permissions
+			permissions,
 		});
 		return res.status(201).json({
 			success: true,
@@ -57,12 +58,10 @@ export const createSuperUser = async (req, res, next) => {
 		});
 	} catch (err) {
 		console.error(err.message);
-		return res
-			.status(500)
-			.json({
-				message: 'Encountered an issue while creating new super user',
-				Error: err.message,
-			});
+		return res.status(500).json({
+			message: 'Encountered an issue while creating new super user',
+			Error: err.message,
+		});
 	}
 };
 
@@ -70,7 +69,4 @@ export const createSuperUser = async (req, res, next) => {
 // export const adminUtilitiesPage = async (req, res, next) => {
 // 	const templatePath = pug.renderFile(`${__dirname}/../views/templates/admin.pug`);
 
-
-
-	
 // }
