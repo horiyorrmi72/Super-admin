@@ -1,6 +1,6 @@
 {
   "name": "super-admin-panel",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "super admin panel backend api template using express node js, expect more!",
   "main": "server.js",
   "type": "module",
@@ -12,14 +12,24 @@
     "start": "NODE_ENV=production node server.js",
     "dev": "NODE_ENV=development nodemon server"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/horiyorrmi72/Super-admin.git"
+  },
   "keywords": [
     "super-admin-panel",
     "admin-panel",
     "node-js-super-admin-panel",
     "nodejs-admin-panel",
-    "super-admin"
+    "super-admin",
+    "mongodb",
+    "super-user"
   ],
-  "author": "horla_techs",
+  "author": "horla_techs <horiyorrmi72@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/horiyorrmi72/Super-admin/issues"
+  },
+  "homepage": "https://github.com/horiyorrmi72/Super-admin",
   "license": "ISC",
   "dependencies": {
     "admin_panel": "^0.0.1",
